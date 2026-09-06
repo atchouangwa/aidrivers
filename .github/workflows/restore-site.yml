@@ -1,0 +1,28 @@
+name: Restore deploy-ready site
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore site payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .deploy/chunk* | base64 -d > /tmp/aidrivers_payload.zip
+          echo "9d260375121f25a75c7ef449257dd7ad7146a8dd02854e12a51927c9f7297569  /tmp/aidrivers_payload.zip" | sha256sum -c -
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          unzip -q /tmp/aidrivers_payload.zip -d .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Deploy AI Drivers landing page"
+          git push origin HEAD:main
