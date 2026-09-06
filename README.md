@@ -1,11 +1,14 @@
 # AI Drivers × Alo Affiliate Landing Page
 
-Static, no-build affiliate landing page for AI Drivers.
+This repository serves the complete AI Drivers affiliate landing page.
 
-## Deploy
-- Vercel: import this repository, set Framework Preset to `Other`, and leave the build command blank. The site is served from the repository root.
-- Netlify: import this repository and use `.` as the publish directory. No build command is required.
-- Cloudflare Pages: no build command; output directory is `.`.
+## Deployment
+- Vercel: Framework Preset `Other`
+- Build command: none
+- Output directory: repository root
+- Entry point: `index.html`
+
+The page is split into parser-loaded static fragments under `/parts` plus `app.js`. This preserves the full landing page while remaining build-free for Vercel.
 
 ## Conversion links
 - Discovery call: https://cal.com/ai-driver-kabrin/discovery-call
@@ -13,9 +16,3 @@ Static, no-build affiliate landing page for AI Drivers.
 - TikTok: https://www.tiktok.com/@runmorewebinars
 - Instagram: https://www.instagram.com/runmorewebinars
 - X: https://x.com/runmorewebinars
-
-## Tracking
-CTA and FAQ interactions push named events to `window.dataLayer`. Add GTM/GA4/Meta Pixel IDs at deployment time; no IDs are hard-coded.
-
-## Compliance
-Affiliate disclosures and results disclaimers are included. Affiliate checkout links use `nofollow sponsored`.
